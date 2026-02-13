@@ -147,16 +147,51 @@
     <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-wrapper">
-                <p>Have a project in mind? Let's work together.</p>
-                <div class="social-links">
-                    <a href="mailto:elangoariraman@gmail.com" class="btn primary-btn"><i
-                            class="fa-solid fa-envelope"></i> Email Me</a>
-                    <a href="https://www.linkedin.com/in/elango-a-65a8753b0" class="btn primary-btn"><i
-                            class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/Elango-07" class="btn primary-btn"><i class="fa-brands fa-github"></i>
-                        GitHub</a>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p class="section-subtitle">Let's Connect</p>
+                    <h3 class="name" style="font-size: 2.5rem; text-align: left; margin-bottom: 20px;">Have a project in
+                        mind?</h3>
+                    <p class="contact-desc">I'm always open to discussing web development work or partnership
+                        opportunities.</p>
+                    <div class="social-links-vertical">
+                        <a href="mailto:elangoariraman@gmail.com" class="contact-link"><i
+                                class="fa-solid fa-envelope"></i> elangoariraman@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/elango-a-65a8753b0" class="contact-link"><i
+                                class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
+                        <a href="https://github.com/Elango-07" class="contact-link"><i class="fa-brands fa-github"></i>
+                            GitHub Profile</a>
+                    </div>
                 </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="input-group">
+                        <input type="text" id="name" required placeholder=" ">
+                        <label for="name">Your Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="email" required placeholder=" ">
+                        <label for="email">Your Email</label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="message" rows="5" required placeholder=" "></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit" class="btn primary-btn submit-btn">Send Message <i
+                            class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+
+            <!-- Custom Notification Popup -->
+            <div id="notification" class="notification hidden">
+                <div class="notification-icon">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <div class="notification-content">
+                    <h4 id="notification-title">Error</h4>
+                    <p id="notification-msg">Invalid Email Address</p>
+                </div>
+                <button class="close-notification"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
     </section>

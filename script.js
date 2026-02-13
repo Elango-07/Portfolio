@@ -1,53 +1,90 @@
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Hamburger Menu Toggle
+    // Mobile Navigation Toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    const links = document.querySelectorAll('.nav-links li');
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
-
-    // Close menu when link is clicked
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
-    });
+    }
 
     // Smooth Scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+            navLinks.classList.remove('active'); // Close menu on click
+            if (hamburger) hamburger.classList.remove('active');
+
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
         });
     });
 
-    // Intersection Observer for Fade-in Animation
-    const sections = document.querySelectorAll('.section');
-    
-    const observerOptions = {
-        threshold: 0.2
-    };
+    // Form Validation and Notification
+    const contactForm = document.getElementById('contactForm');
+    const notification = document.getElementById('notification');
+    const notifTitle = document.getElementById('notification-title');
+    const notifMsg = document.getElementById('notification-msg');
+    const notifIcon = document.querySelector('.notification-icon i');
+    const closeNotif = document.querySelector('.close-notification');
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
+    function showNotification(type, title, message) {
+        notification.classList.remove('success', 'error', 'hidden');
+        notification.classList.add(type);
+        notification.classList.add('active');
+
+        notifTitle.textContent = title;
+        notifMsg.textContent = message;
+
+        if (type === 'success') {
+            notifIcon.className = 'fa-solid fa-circle-check';
+        } else {
+            notifIcon.className = 'fa-solid fa-circle-exclamation';
+        }
+
+        // Auto hide after 5 seconds
+        setTimeout(() => {
+            notification.classList.remove('active');
+        }, 5000);
+    }
+
+    if (closeNotif) {
+        closeNotif.addEventListener('click', () => {
+            notification.classList.remove('active');
         });
-    }, observerOptions);
+    }
 
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(50px)';
-        section.style.transition = 'all 0.8s ease-out';
-        observer.observe(section);
-    });
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const emailInput = document.getElementById('email');
+            const nameInput = document.getElementById('name');
+            const messageInput = document.getElementById('message');
+
+            const email = emailInput.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Validate Email
+            if (!emailRegex.test(email)) {
+                showNotification('error', 'Invalid Email', 'Please enter a valid email address.');
+                emailInput.focus();
+                // Add shake animation to input to indicate error visually
+                emailInput.style.borderColor = 'red';
+                setTimeout(() => emailInput.style.borderColor = 'rgba(255,255,255,0.2)', 2000);
+                return;
+            }
+
+            // Success Simulation
+            // Ideally, here you would call emailjs.sendForm(...)
+            showNotification('success', 'Message Sent!', 'Thanks, ' + nameInput.value + '. I will get back to you soon.');
+
+            // Clear form
+            contactForm.reset();
+        });
+    }
 });
