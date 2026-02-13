@@ -646,6 +646,7 @@ footer p {
         justify-content: center;
     }
 }
+
 /* Contact Section Redesign */
 .contact-container {
     display: flex;
@@ -740,11 +741,27 @@ footer p {
     transition: var(--transition);
     outline: none;
     resize: none;
+    text-align: center;
+}
+
+/* Remove default browser autofill white background */
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover,
+.input-group input:-webkit-autofill:focus,
+.input-group textarea:-webkit-autofill,
+.input-group textarea:-webkit-autofill:hover,
+.input-group textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-color);
+    -webkit-box-shadow: 0 0 0px 1000px #1e1e1e inset;
+    /* Matches dark theme roughly, or transparent hack */
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .input-group label {
     position: absolute;
-    left: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
     top: 15px;
     color: var(--text-secondary);
     pointer-events: none;
