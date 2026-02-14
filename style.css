@@ -2,8 +2,11 @@
 /* Global Color Update */
 :root {
     --bg-color: #050505;
-    --card-bg: rgba(255, 255, 255, 0.08);
-    /* More visible glass */
+    /* Deep rich black */
+    --card-bg: rgba(20, 20, 20, 0.5);
+    /* Transparent glass effect */
+    --input-bg: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent inputs */
     --primary-color: #ff0000;
     /* Red */
     --primary-hover: #ff3333;
@@ -439,35 +442,93 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
+    padding: 20px;
 }
 
 .skill-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
+    background: #0a0a0a;
+    padding: 40px 20px;
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: floatCard 6s ease-in-out infinite;
+}
+
+/* Staggered Animation Delays */
+.skill-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.skill-card:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.skill-card:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.skill-card:nth-child(4) {
+    animation-delay: 0.5s;
+}
+
+.skill-card:nth-child(5) {
+    animation-delay: 1.5s;
+}
+
+.skill-card:nth-child(6) {
+    animation-delay: 2.5s;
+}
+
+@keyframes floatCard {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 .skill-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-15px) scale(1.05);
     border-color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4), inset 0 0 10px rgba(255, 0, 0, 0.1);
+    animation-play-state: paused;
 }
 
 .skill-card h3 {
     margin-bottom: 15px;
     color: var(--primary-color);
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .skill-card i {
     display: block;
-    font-size: 3rem;
-    margin-bottom: 15px;
+    /* Ensure block display for correct spacing */
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover i {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.skill-card p {
+    color: #cccccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 /* Projects */
@@ -653,144 +714,180 @@ footer p {
     flex-wrap: wrap;
     gap: 50px;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
+    /* Level at the bottom as requested */
     margin-top: 40px;
+    padding-bottom: 20px;
+    /* Little bit of space at bottom */
 }
 
 .contact-info {
-    flex: 1 1 300px;
+    flex: 1 1 250px;
+    /* Reduced flex-basis */
 }
 
 .section-subtitle {
     color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-size: 0.9rem;
 }
 
 .contact-heading {
     font-size: 2.5rem;
+    /* Reduced from 3.5rem */
+    font-weight: 800;
+    color: var(--primary-color);
     margin-bottom: 20px;
-    line-height: 1.2;
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
 }
+
+
 
 .contact-desc {
     color: var(--text-secondary);
     margin-bottom: 30px;
-    font-size: 1.1rem;
+    /* Reduced margin */
+    font-size: 1rem;
+    /* Reduced font size */
 }
 
 .social-links-vertical {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    /* Reduced gap */
 }
 
 .contact-link {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.1rem;
     display: flex;
     align-items: center;
-    gap: 15px;
-    transition: var(--transition);
+    gap: 12px;
     padding: 15px;
+    /* Reduced padding */
+    background: var(--card-bg);
+    /* Match card layer */
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.03);
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    /* Glass blur */
 }
 
 .contact-link:hover {
-    background: rgba(255, 0, 0, 0.1);
+    background: #1a1a1a;
     border-color: var(--primary-color);
     transform: translateX(10px);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.1);
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    /* Slightly rounded square icon look */
 }
 
 .contact-link i {
     color: var(--primary-color);
-    font-size: 1.4rem;
+    font-size: 1.8rem;
 }
 
 /* Premium Form Styling */
+/* Premium Form Styling */
 .contact-form {
     flex: 1 1 400px;
+    /* Reduced width */
     background: var(--card-bg);
-    padding: 40px;
+    /* Use the new card layer variable */
+    padding: 35px;
+    /* Reduced padding */
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(25px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    /* Deeper shadow for floating effect */
+    backdrop-filter: blur(10px);
+    /* Glass blur */
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .input-group {
+    flex: 1;
 }
 
 .input-group {
-    position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    width: 100%;
 }
 
 .input-group input,
 .input-group textarea {
     width: 100%;
-    padding: 15px 10px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-color);
-    font-size: 1.1rem;
+    padding: 15px;
+    /* Reduced padding */
+    background: var(--input-bg);
+    /* Darker cutout look */
+    border: 1px solid #1f1f1f;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.95rem;
+    /* Reduced font size */
     font-family: var(--font-main);
     transition: var(--transition);
     outline: none;
     resize: none;
-    text-align: center;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    /* Inner shadow for depth */
 }
 
-/* Remove default browser autofill white background */
-.input-group input:-webkit-autofill,
-.input-group input:-webkit-autofill:hover,
-.input-group input:-webkit-autofill:focus,
-.input-group textarea:-webkit-autofill,
-.input-group textarea:-webkit-autofill:hover,
-.input-group textarea:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--text-color);
-    -webkit-box-shadow: 0 0 0px 1000px #1e1e1e inset;
-    /* Matches dark theme roughly, or transparent hack */
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-.input-group label {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    top: 15px;
-    color: var(--text-secondary);
-    pointer-events: none;
-    transition: var(--transition);
-    font-size: 1.1rem;
-}
-
-/* Floating Label Animation */
 .input-group input:focus,
-.input-group input:not(:placeholder-shown),
-.input-group textarea:focus,
-.input-group textarea:not(:placeholder-shown) {
-    border-bottom-color: var(--primary-color);
+.input-group textarea:focus {
+    border-color: var(--primary-color);
+    background: #000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
 }
 
-.input-group input:focus~label,
-.input-group input:not(:placeholder-shown)~label,
-.input-group textarea:focus~label,
-.input-group textarea:not(:placeholder-shown)~label {
-    top: -10px;
-    font-size: 0.9rem;
-    color: var(--primary-color);
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: #666;
 }
 
 .submit-btn {
     width: 100%;
-    justify-content: center;
-    font-size: 1.1rem;
-    margin-top: 10px;
+    padding: 14px;
+    /* Reduced padding */
+    border-radius: 40px;
+    font-size: 1rem;
+    /* Reduced font size */
+    font-weight: 700;
+    margin-top: 5px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+    /* stronger glow */
+    transition: var(--transition);
+}
+
+.submit-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+    /* intense glow on hover */
 }
 
 /* Custom Notification Popup */
