@@ -190,14 +190,14 @@
                 <form class="contact-form" id="contactForm">
                     <div class="form-row">
                         <div class="input-group">
-                            <input type="text" id="name" placeholder="Your Name" required>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="input-group">
-                            <input type="email" id="email" placeholder="Your Email" required>
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
                         </div>
                     </div>
                     <div class="input-group">
-                        <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
                     </div>
                     <button type="submit" class="btn primary-btn submit-btn">Send Message <i
                             class="fa-solid fa-paper-plane"></i></button>
@@ -222,6 +222,13 @@
         <p>&copy; 2024 Elango A. All rights reserved.</p>
     </footer>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('sPNa-C8rKpXb4kFAx');
+        })();
+    </script>
     <script src="script.js"></script>
 </body>
 

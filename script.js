@@ -79,12 +79,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Success Simulation
-            // Ideally, here you would call emailjs.sendForm(...)
-            showNotification('success', 'Message Sent!', 'Thanks, ' + nameInput.value + '. I will get back to you soon.');
+            // EmailJS Configuration
+            const serviceID = 'service_22uemco';
+            const templateID = 'template_jffinw8';
 
-            // Clear form
-            contactForm.reset();
+            // Send Code
+            const templateParams = {
+                name: nameInput.value,
+                user_email: emailInput.value,
+                message: messageInput.value,
+                time: new Date().toLocaleString()
+            };
+
+            emailjs.send(serviceID, templateID, templateParams)
+                .then(() => {
+                    showNotification('success', 'Message Sent!', 'Thanks, ' + nameInput.value + '. I will get back to you soon.');
+                    contactForm.reset();
+                }, (err) => {
+                    showNotification('error', 'Failed to Send', 'Something went wrong. Please try again later.');
+                    console.log(JSON.stringify(err));
+                });
         });
     }
 });
